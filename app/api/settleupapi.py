@@ -1,17 +1,17 @@
 from fastapi import APIRouter, Response
 
 from app.models.transaction import Transaction
-from app.core.config import SETTLE_UP_API_KEY, SETTLE_UP_AUTH_DOMAIN, SETTLE_UP_DATABASE_URL, SETTLE_UP_STORAGE_BUCKET, SETTLE_UP_USER, \
-    SETTLE_UP_PASSWORD
+from app.core.config import SETTLE_UP_FIREBASE_API_KEY, SETTLE_UP_USER, \
+    SETTLE_UP_PASSWORD, SETTLE_UP_FIREBASE_PROJECT_NAME
 from app.services.settleupclient import SettleUpClient
 
 router = APIRouter()
 
 firebase_config = {
-    "apiKey": SETTLE_UP_API_KEY,
-    "authDomain": SETTLE_UP_AUTH_DOMAIN,
-    "databaseURL": SETTLE_UP_DATABASE_URL,
-    "storageBucket": SETTLE_UP_STORAGE_BUCKET
+    "apiKey": SETTLE_UP_FIREBASE_API_KEY,
+    "authDomain": "{}.firebaseapp.com".format(SETTLE_UP_FIREBASE_PROJECT_NAME),
+    "databaseURL": "https://{}.firebaseio.com".format(SETTLE_UP_FIREBASE_PROJECT_NAME),
+    "storageBucket": "{}.appspot.com".format(SETTLE_UP_FIREBASE_PROJECT_NAME),
 }
 settle_up_config = {
     "email": SETTLE_UP_USER,
