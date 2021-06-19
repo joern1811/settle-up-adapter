@@ -17,16 +17,16 @@ class SettleUpClient:
         else:
             self._logger = setup_logger("settle-up-client")
 
-    def add_transaction(self, transaction: Transaction):
+    def add_transaction(self, group_name: str, transaction: Transaction):
         self._logger.info(
-            "add_transaction was called for group_name='{}', purpose='{}', time='{}' amount='{}' and who_paid_name='{}'".format(transaction.groupName,
+            "add_transaction was called for group_name='{}', purpose='{}', time='{}' amount='{}' and who_paid_name='{}'".format(group_name,
                                                                                                                                 transaction.purpose,
                                                                                                                                 transaction.amount,
                                                                                                                                 transaction.time,
                                                                                                                                 transaction.whoPaidName))
-        group_id = self._find_group_id(transaction.groupName)
-        for_whom = self._create_for_whom_array(transaction.groupName)
-        who_paid = self._create_who_paid(transaction.groupName, transaction.whoPaidName)
+        group_id = self._find_group_id(group_name)
+        for_whom = self._create_for_whom_array(group_name)
+        who_paid = self._create_who_paid(group_name, transaction.whoPaidName)
         if group_id and for_whom and who_paid:
             data = {"currencyCode": "EUR",
                     "dateTime": transaction.time,

@@ -20,8 +20,8 @@ settle_up_config = {
 settle_up_client = SettleUpClient(firebase_config, settle_up_config)
 
 
-@router.post('/transactions')
-def add_transaction(transaction: Transaction, response: Response):
-    transaction_id = settle_up_client.add_transaction(transaction)
+@router.post('/groups/{group_name}/transactions', tags=["transactions"])
+def add_transaction(group_name: str, transaction: Transaction, response: Response):
+    transaction_id = settle_up_client.add_transaction(group_name, transaction)
     response.headers['Location'] = "transactions/" + transaction_id
     return {"created": "true"}
