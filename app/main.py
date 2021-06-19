@@ -5,7 +5,11 @@ import uvicorn
 
 from app.api import settleupapi
 
-app = fastapi.FastAPI()
+app = fastapi.FastAPI(
+    title="Settle-Up-REST-API",
+    description="REST-API-Adapter to the settle-up firebase database",
+    version="0.0.1"
+)
 
 
 def configure():
