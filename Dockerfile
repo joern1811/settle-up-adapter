@@ -6,6 +6,11 @@ RUN pip install -r requirements.txt
 
 EXPOSE 80
 
+COPY env_secrets_expand.sh .
+COPY run.sh .
 COPY ./app /app
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+RUN chmod +x env_secrets_expand.sh
+RUN chmod +x run.sh
+
+ENTRYPOINT ["./run.sh"]
