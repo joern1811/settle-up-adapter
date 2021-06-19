@@ -25,3 +25,13 @@ def add_transaction(group_name: str, transaction: Transaction, response: Respons
     transaction_id = settle_up_client.add_transaction(group_name, transaction)
     response.headers['Location'] = "transactions/" + transaction_id
     return {"created": "true"}
+
+
+@router.delete('/groups/{group_name}/transactions', tags=["transactions"])
+def delete_group_transactions(group_name: str):
+    settle_up_client.delete_group_transactions(group_name)
+
+
+@router.delete('/groups/{group_name}/transactions/{transaction_id}', tags=["transactions"])
+def delete_transaction(group_name: str, transaction_id: str):
+    settle_up_client.delete_transaction(group_name, transaction_id)

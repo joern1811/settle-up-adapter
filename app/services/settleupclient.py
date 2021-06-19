@@ -101,3 +101,7 @@ class SettleUpClient:
     def delete_transaction(self, group_name: str, transaction_id: str):
         group_id = self._find_group_id(group_name)
         self._database.child("transactions").child(group_id).child(transaction_id).remove(self._id_token)
+
+    def delete_group_transactions(self, group_name: str):
+        group_id = self._find_group_id(group_name)
+        self._database.child("transactions").child(group_id).remove(self._id_token)
