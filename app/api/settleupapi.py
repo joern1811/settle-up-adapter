@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Response
 
-from app.models.transaction import Transaction
 from app.core.config import SETTLE_UP_FIREBASE_API_KEY, SETTLE_UP_USER, \
     SETTLE_UP_PASSWORD, SETTLE_UP_FIREBASE_PROJECT_NAME
+from app.models.transaction import Transaction
 from app.services.settleupclient import SettleUpClient
 
 router = APIRouter()
@@ -18,6 +18,13 @@ settle_up_config = {
     "password": SETTLE_UP_PASSWORD
 }
 settle_up_client = SettleUpClient(firebase_config, settle_up_config)
+
+
+# for test reasons, not mapped to transaction model
+@router.get('/groups/{group_name}/transactions/', tags=["transactions"])
+def get_transactions(group_name: str):
+    transactions = settle_up_client.get_transactions(group_name)
+    return transactions
 
 
 @router.post('/groups/{group_name}/transactions', tags=["transactions"])
