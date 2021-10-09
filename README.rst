@@ -5,7 +5,7 @@ The aim of this project is to provide a rest-adapter for the firebase database u
 
 The main purpose is to evenly distribute a recurring payment across a specific group.
 
-Getting started
+How to start
 ---------------
 The application is configured to run in a docker container. For example you can start the application by creating a .env file with the following entries (here the `sandbox <https://settle-up-sandbox-app.web.app/>`_ ist used):
 
@@ -25,5 +25,5 @@ Afterwards you can start the docker container by typing:
 
 Now you can visit the swagger-ui on http://localhost:8080/docs or http://localhost:8080/redoc and add transactions.
 
-For further requirements to use the prod environment see https://docs.google.com/document/d/18mxnyYSm39cbceA2FxFLiOfyyanaBY6ogG7oscgghxU/edit
+For further requirements to use the settle-up prod environment see https://docs.google.com/document/d/18mxnyYSm39cbceA2FxFLiOfyyanaBY6ogG7oscgghxU/edit.
 
