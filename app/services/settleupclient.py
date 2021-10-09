@@ -1,4 +1,5 @@
 import pyrebase
+from requests import HTTPError
 
 from app.models.transaction import Transaction
 from app.utils.logging import setup_logger
@@ -96,7 +97,11 @@ class SettleUpClient:
 
     def get_transactions(self, group_name: str):
         group_id = self._find_group_id(group_name)
-        return self._database.child("transactions").child(group_id).get(self._id_token)
+        try:
+            return self._database.child("transactions").child(group_id).get(self._id_token)
+        except HTTPError as e:
+            self._logger.warn(e)
+            return []
 
     def delete_transaction(self, group_name: str, transaction_id: str):
         group_id = self._find_group_id(group_name)
