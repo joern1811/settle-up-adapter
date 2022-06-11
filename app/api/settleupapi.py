@@ -42,3 +42,8 @@ def delete_group_transactions(group_name: str):
 @router.delete('/groups/{group_name}/transactions/{transaction_id}', tags=["transactions"])
 def delete_transaction(group_name: str, transaction_id: str):
     settle_up_client.delete_transaction(group_name, transaction_id)
+
+
+@router.get('/health', tags="system")
+def health_check():
+    return {""}
